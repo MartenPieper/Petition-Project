@@ -1,0 +1,22 @@
+<canvas class = "canvas" id="canvas2">Canvas is not supported in your browser.</canvas>
+<canvas class = "canvas" id="canvas3">Canvas is not supported in your browser.</canvas>
+
+<h1 class="text heading">Welcome Back to the Fast Internet Movement</h1>
+
+<div class="login">
+    <h3 class="text heading">Login</h3>
+<form class="loginsubmit" method="POST" >
+    <input class="inputregister" type="text" name="email" placeholder="Email">
+    <input class="inputregister" type="password" name="password" placeholder="Password">
+    <input class="inputregister" type="hidden" name="_csrf" value="{{csrfToken}}">
+    <button class="inputregister button"  type="submit" name="button">submit</button>
+
+    <p class="text" id="centertext">Not registered yet? Please sign up <a href="/register">here</a></p>
+</form>
+
+
+
+{{#if error}}
+<p class="error">There was an error with your {{error}}</p>
+{{/if}}
+</div>

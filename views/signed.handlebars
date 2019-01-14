@@ -1,0 +1,19 @@
+<canvas class = "canvas" id="canvas2">Canvas is not supported in your browser.</canvas>
+<canvas class = "canvas" id="canvas3">Canvas is not supported in your browser.</canvas>
+
+<h1 class="text heading">The Signers of this Petition demand faster Internet across Germany:</h1>
+
+<div class="signed">
+
+<ul>
+{{#each people}}
+    <li class="signedlist">{{#if url}}<a href={{url}} target="_blank">
+    <p class="text">{{/if}}{{firstname}} {{lastname}}</a> {{#if age}}{{age}}{{/if}} {{#if city}}
+    <a href="/signed/{{city}}" class="signedlink">{{city}}</a>{{/if}} {{#if date}}{{date}}{{/if}}
+    </p>
+    </li>
+ {{/each}}
+</ul>
+</div>
+
+{{> nav}}

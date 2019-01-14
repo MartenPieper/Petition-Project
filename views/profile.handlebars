@@ -1,0 +1,19 @@
+<canvas class = "canvas" id="canvas2">Canvas is not supported in your browser.</canvas>
+<canvas class = "canvas" id="canvas3">Canvas is not supported in your browser.</canvas>
+
+<div class="profile">
+<h3 class="text heading">Insert Additional Information*:</h3>
+
+<form class="profilesubmit" method="POST" >
+    <input class="inputprofile  text" type="text" name="age" placeholder="Age">
+    <input class="inputprofile  text" type="text" name="city" placeholder="City">
+    <input class="inputprofile  text" type="url" name="url" placeholder="Homepage">
+    <input class="inputprofile  text" type="hidden" name="_csrf" value="{{csrfToken}}">
+    <button class="inputprofile button" type="submit" name="button">submit</button>
+    <p class="text">All information will be treated confidental</p>
+</form>
+
+
+
+</div>
+{{> nav}}

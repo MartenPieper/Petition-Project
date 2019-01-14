@@ -1,0 +1,37 @@
+<canvas class = "canvas" id="canvas2">Canvas is not supported in your browser.</canvas>
+<canvas class = "canvas" id="canvas3">Canvas is not supported in your browser.</canvas>
+
+<h1 class="text heading">Edit your profile</h1>
+
+<div class="edit">
+
+<form class="formsubmit" method="POST" >
+    <input class="inputedit" type="text" value="{{firstname}}" name="firstname" placeholder="First name">
+    <input class="inputedit" type="text" value="{{lastname}}" name="lastname" placeholder="Last name">
+    <input class="inputedit" type="text" value="{{email}}" name="email" placeholder="Email">
+    <input class="inputedit" type="password" name="password" placeholder="Password">
+
+    <input class="inputedit" type="text" value="{{#if age}}{{age}}{{/if}}" name="age" placeholder="Age">
+    <input class="inputedit" type="text" value="{{#if city}}{{city}}{{/if}}" name="city" placeholder="City">
+    <input class="inputedit" type="url" value="{{#if url}}{{url}}{{/if}}" name="url" placeholder="Homepage">
+    <input class="inputedit" type="hidden" name="_csrf" value="{{csrfToken}}">
+    <button class="button inputregister" for="switch" type="submit" name="button">Submit</button>
+</form>
+
+
+
+
+{{#if error}}
+<h3>There was an error with your input</h3>
+{{/if}}
+
+</div>
+
+<form class="deleteprofile" method="POST" action="/profile/delete">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+    <button class="button">
+        Delete Your Profile
+    </button>
+</form>
+
+{{> nav}}

@@ -1,0 +1,571 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.canvas {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#canvassubmit {
+    position: relative;
+    display: block;
+    margin-top: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 400px;
+    z-index: 10;
+}
+#canvas {
+    border: 3px solid #0d1d05;
+    position: relative;
+    /* top: 30%; */
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    /* width: 30%; */
+}
+
+#petitionbutton {
+    position: relative;
+    display: block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.text {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Ubuntu Condensed", sans-serif;
+    color: #b6c89f;
+    display: block;
+}
+
+#newsletter {
+    font-family: "Ubuntu Condensed", sans-serif;
+    color: #b6c89f;
+    display: block;
+}
+
+.error {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Ubuntu Condensed", sans-serif;
+    color: #b6c89f;
+}
+
+.formsubmit {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    /* flex-wrap: wrap;
+    justify-content: center;
+    align-content: space-around; */
+    width: 350px;
+    height: 450px;
+    top: 20%;
+}
+
+.navbar {
+    width: 150px;
+    height: 150px;
+    border-color: #0d1d05;
+    background-color: rgba(11, 13, 10, 0.9);
+    border-style: solid;
+    border-width: 5px;
+    text-align: justify;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+}
+
+.navtext {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Ubuntu Condensed", sans-serif;
+    color: #b6c89f;
+    display: block;
+    text-decoration: none;
+}
+
+.navtext:hover {
+    text-decoration: underline;
+    color: #b6c89f;
+}
+
+input[type="text"] {
+    padding: 5px;
+    border: 2px solid #ccc;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+input[type="text"]:focus {
+    border-color: #333;
+}
+
+input[type="password"] {
+    padding: 5px;
+    border: 2px solid #ccc;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+input[type="password"]:focus {
+    border-color: #333;
+}
+
+input[type="url"] {
+    padding: 5px;
+    border: 2px solid #ccc;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+input[type="url"]:focus {
+    border-color: #333;
+}
+input[type="submit"] {
+    padding: 5px 15px;
+    background: #ccc;
+    border: 0 none;
+    cursor: pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+/* /Register Page */
+.register {
+    display: flex;
+    margin: 0;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 500px;
+    border-color: #0d1d05;
+    background-color: rgba(11, 13, 10, 0.9);
+    border-style: solid;
+    border-width: 5px;
+
+    text-align: justify;
+}
+
+.registersubmit {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    /* flex-wrap: wrap;
+    justify-content: center;
+    align-content: space-around; */
+    width: 100%;
+    height: 450px;
+    top: 20%;
+}
+
+.inputregister {
+    position: relative;
+    margin: 10px 10px 15px 15px;
+    display: block;
+
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.heading {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.subheading {
+    position: relative;
+    display: block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#registerheading {
+    top: 10%;
+}
+
+#centertext {
+    text-align: center;
+}
+
+/* /Register Page END */
+
+/* /Login Page */
+
+.login {
+    margin: 0;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 350px;
+    border-color: #0d1d05;
+    background-color: rgba(11, 13, 10, 0.9);
+    border-style: solid;
+    border-width: 5px;
+
+    text-align: justify;
+}
+
+.loginsubmit {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    /* flex-wrap: wrap;
+    justify-content: center;
+    align-content: space-around; */
+    width: 100%;
+    top: 30%;
+}
+
+/* /Login Page END */
+
+/* /Profile Page */
+.profile {
+    /* display: flex; */
+    margin: 0;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 450px;
+    border-color: #0d1d05;
+    background-color: rgba(11, 13, 10, 0.9);
+    border-style: solid;
+    border-width: 5px;
+
+    text-align: justify;
+}
+
+.profilesubmit {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 50px;
+    /* flex-wrap: wrap;
+    justify-content: center;
+    align-content: space-around;
+    width: 350px;
+    height: 450px; */
+}
+
+.inputprofile {
+    position: relative;
+    margin: 10px 10px 15px 15px;
+    display: block;
+
+    left: 50%;
+    transform: translateX(-50%);
+}
+/* /Profile Page END */
+
+/* /Profile/Edit Page*/
+
+.edit {
+    margin: 0;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 450px;
+    border-color: #0d1d05;
+    background-color: rgba(11, 13, 10, 0.9);
+    border-style: solid;
+    border-width: 5px;
+
+    text-align: justify;
+}
+.inputedit {
+    position: relative;
+    margin: 10px 10px;
+    display: block;
+    vertical-align: top;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.deleteprofile {
+    position: absolute;
+    /* display: block; */
+    left: 10%;
+    top: 50%;
+    /* top-margin: 400px; */
+    transform: translate(-50%, -50%);
+}
+
+.inputregister {
+}
+
+/* /Profile/Edit Page END*/
+/* /Petition Page */
+
+.petition {
+    /* display: flex; */
+    margin: 0;
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 650px;
+    border-color: #0d1d05;
+    background-color: rgba(11, 13, 10, 1);
+    border-style: solid;
+    border-width: 5px;
+    text-align: justify;
+}
+
+.infos {
+    position: relative;
+    top: 70%;
+    display: block;
+    width: 100%;
+}
+
+/* /Petition Information boxes */
+.infotext {
+    position: relative;
+    /* vertical-align: top; */
+
+    list-style: none;
+    display: inline-block;
+    width: 40%;
+    background: rgba(49, 58, 44, 0.9);
+    /* padding: 30px;
+    margin: 20px; */
+    transition: 200ms ease-in-out all;
+    line-height: 0;
+    cursor: pointer;
+}
+
+.infotext:focus {
+    background: rgba(23, 33, 18, 1);
+    line-height: 1.2;
+    outline: none;
+}
+
+#infotext1:after {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    display: block;
+    content: "Mission Details";
+}
+
+#infotext2:after {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    display: block;
+    content: "About Movement";
+}
+
+.infotext:before {
+    position: absolute;
+    opacity: 1;
+    display: block;
+    /* right: 20px; */
+    content: ">";
+    transform: rotate(90deg);
+    transition: 200ms ease-in-out all;
+}
+
+.infotext:focus:before {
+    opacity: 0;
+}
+
+.infotext:focus span {
+    animation: 2s show;
+    opacity: 1;
+}
+
+.infotext span {
+    opacity: 0;
+    font-size: 12px;
+}
+
+.infotext:focus:after {
+    display: none;
+}
+
+@keyframes show {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Information boxes END */
+/* /Petition Page END */
+
+/* /Thanks Page */
+
+.thanks {
+    margin: 0;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 550px;
+    border-color: #0d1d05;
+    background-color: rgba(11, 13, 10, 0.9);
+    border-style: solid;
+    border-width: 5px;
+
+    text-align: justify;
+}
+
+#signatureimage {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.deleteinput {
+    position: absolute;
+    left: 15%;
+    transform: translateX(-50%);
+    top: 80%;
+}
+
+.newsletterinput {
+    position: absolute;
+    left: 20%;
+    transform: translateX(-50%);
+    top: 40%;
+}
+
+.thankslink {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Ubuntu Condensed", sans-serif;
+    color: #b6c89f;
+    display: block;
+    text-decoration: none;
+}
+
+#newsletterbutton {
+    position: relative;
+    /* left: 50%;
+    transform: translateX(-50%); */
+    display: block;
+}
+/* /Thanks Page END */
+
+/* /Signed Page */
+.signed {
+    display: flex;
+    margin: 0;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 450px;
+    border-color: #0d1d05;
+    background-color: rgba(11, 13, 10, 0.9);
+    border-style: solid;
+    border-width: 5px;
+    transform: translateX(-50%);
+    text-align: justify;
+}
+
+.signedlist {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Ubuntu Condensed", sans-serif;
+    color: #b6c89f;
+    display: block;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+#signedlink {
+    font-family: "Ubuntu Condensed", sans-serif;
+    text-decoration: none;
+}
+
+#signedlink:hover {
+    text-decoration: underline;
+    color: #b6c89f;
+}
+
+/* /Signed Page  END */
+
+/* /SignedCity Page */
+.signedcity {
+    display: flex;
+    margin: 0;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 450px;
+    border-color: #0d1d05;
+    background-color: rgba(11, 13, 10, 0.9);
+    border-style: solid;
+    border-width: 5px;
+    transform: translateX(-50%);
+    text-align: justify;
+}
+/* /Signed Page  END */
+
+.button {
+    display: inline-block;
+    background: transparent;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 0.625rem;
+    letter-spacing: 0.3em;
+    color: rgba(23, 33, 18, 1);
+    border-radius: 0;
+    padding: 18px 80px 20px;
+    transition: all 0.7s ease-out;
+    background: linear-gradient(
+        270deg,
+        rgba(223, 190, 106, 0.8),
+        rgba(146, 111, 52, 0.8),
+        rgba(34, 34, 34, 0),
+        rgba(34, 34, 34, 0)
+    );
+    background-position: 1% 50%;
+    background-size: 300% 300%;
+    text-decoration: none;
+    margin: 0.625rem;
+    border: none;
+    border: 1px solid rgba(223, 190, 106, 0.3);
+}
+
+.button:hover {
+    color: #fff;
+    border: 2px solid rgba(223, 190, 106, 0);
+    color: $white;
+    background-position: 99% 50%;
+}
+/* Button design END */
