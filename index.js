@@ -12,14 +12,14 @@ app.set("view engine", "handlebars");
 
 // Other imports
 var cookieSession = require("cookie-session");
-var bodyParser = require("body-parser");
 const csurf = require("csurf");
 const db = require("./db");
 var bcrypt = require("./bcrypt");
 
+// Middleware START
 app.use(
     cookieSession({
-        secret: process.env.SESSION_SECRET || require("./secrets").secret, // process.env.SESSION_SECRET || require("./passwords").sessionSecret // Old secret "nobody knows this secret but me"
+        secret: process.env.SESSION_SECRET || require("./secrets").secret,
         maxAge: 1000 * 60 * 60 * 24 * 7 * 6
     })
 );
@@ -28,12 +28,6 @@ app.disable("x-powered-by");
 
 app.use(express.static("./public"));
 
-// app.use(
-//     cookieSession({
-//         secret: `I'm always angry.`,
-//         maxAge: 1000 * 60 * 60 * 24 * 14
-//     })
-// );
 app.use(bodyParser.json({ limit: "50mb" }));
 
 app.use(
@@ -50,10 +44,16 @@ app.use(function(req, res, next) {
     next();
 });
 
+// Middleware end
+
+// Routes START
+
+// Redirect of default route to register
 app.get("/", (req, res) => {
     res.redirect("/register");
 });
 
+// Register GET route - Rendering register page or redirecting logged in users
 app.get("/register", (req, res) => {
     if (!req.session.userId) {
         res.render("register", {
@@ -64,6 +64,7 @@ app.get("/register", (req, res) => {
     }
 });
 
+// Register POST route -  db query to save user data + setting cookie, then redirecting to profile or rejecting input
 app.post("/register", (req, res) => {
     bcrypt
         .hash(req.body.password)
@@ -92,6 +93,7 @@ app.post("/register", (req, res) => {
         });
 });
 
+// Login GET route - Rendering login page or redirecting logged in users
 app.get("/login", (req, res) => {
     if (!req.session.userId) {
         res.render("login", {
@@ -102,8 +104,8 @@ app.get("/login", (req, res) => {
     }
 });
 
+// Login POST route - db query to validate user input, setting cookie, then redirecting
 app.post("/login", (req, res) => {
-    // // Pass Email to db query -> If error, redirct to login page
     db.getUser(req.body.email)
         .then(function(results) {
             return bcrypt
@@ -140,6 +142,7 @@ app.post("/login", (req, res) => {
         });
 });
 
+// Profile GET route - Rendering the profile page including additional information.
 app.get("/profile", (req, res) => {
     if (!req.session.editedProfile) {
         res.render("profile", {
@@ -150,6 +153,7 @@ app.get("/profile", (req, res) => {
     }
 });
 
+// Profile POST route - db query to safe additional profile information
 app.post("/profile", (req, res) => {
     return db
         .updateProfile(
@@ -167,6 +171,7 @@ app.post("/profile", (req, res) => {
         });
 });
 
+// Petition GET route - Rendering petition sign page if user has not signed, otherwise redirect to /thanks route.
 app.get("/petition", (req, res) => {
     if (!req.session.signed) {
         res.render("petition", {
@@ -177,6 +182,7 @@ app.get("/petition", (req, res) => {
     }
 });
 
+// Petition POST route - db query to safe signature string, then redirect.
 app.post("/petition", (req, res) => {
     db.createPetition(req.body.signature, req.session.userId)
         .then(function() {
@@ -190,9 +196,10 @@ app.post("/petition", (req, res) => {
                 layout: "main",
                 error: "error"
             });
-        }); // Options: store in a databases, put it in a cookie, store it in cache
+        });
 });
 
+// Thanks GET route - Rendering page with signup count and signature overview
 app.get("/thanks", (req, res) => {
     Promise.all([db.getCount(), db.getSignature(req.session.userId)])
         .then(function([resultCount, resultSignature]) {
@@ -207,6 +214,7 @@ app.get("/thanks", (req, res) => {
         });
 });
 
+// Thanks POST route -
 app.post("/thanks", (req, res) => {
     Promise.all([db.getCount(), db.getSignature(req.session.userId)])
         .then(function([resultCount, resultSignature]) {
@@ -222,41 +230,17 @@ app.post("/thanks", (req, res) => {
         });
 });
 
+// Signed GET route -
 app.get("/signed", (req, res) => {
     return db.getNames().then(function(results) {
-        // var today = new Date();
-        // console.log("today", today);
-        // var signUp = results.rows.ts_user;
-        // console.log("ts_user Signup", results.rows[0].ts_user);
-        //
-        // function daysBetween(date1, date2) {
-        //     //Get 1 day in milliseconds
-        //     var one_day = 1000 * 60 * 60 * 24;
-        //
-        //     // Convert both dates to milliseconds
-        //     var date1_ms = date1.getTime();
-        //     var date2_ms = date2.getTime();
-        //
-        //     // Calculate the difference in milliseconds
-        //     var difference_ms = date2_ms - date1_ms;
-        //
-        //     // Convert back to days and return
-        //     return Math.round(difference_ms / one_day);
-        // }
-        // var days = daysBetween(signUp, today);
-        // console.log("days", days);
-        // var signedSince = today - signUp;
-        // var signedSince = today.map(date => new Date(date).getTime());
-        // console.log("signedSince", signedSince); // either splice or slice to get only date string from dates or google "date conversion"
-
         res.render("signed", {
             layout: "main",
             people: results.rows
-            // date: days
         });
     });
 });
 
+// Signed:city GET route -
 app.get("/signed/:city", (req, res) => {
     return db.getCity(req.params.city).then(function(results) {
         res.render("signedcity", {
@@ -269,6 +253,7 @@ app.get("/signed/:city", (req, res) => {
     });
 });
 
+// profile/edit GET route -
 app.get("/profile/edit", (req, res) => {
     return db.prefillProfile(req.session.userId).then(function(results) {
         res.render("edit", {
@@ -294,6 +279,7 @@ app.get("/profile/edit", (req, res) => {
     });
 });
 
+// profile/edit POST route -
 app.post("/profile/edit", (req, res) => {
     if (req.body.password) {
         bcrypt
@@ -353,6 +339,7 @@ app.post("/profile/edit", (req, res) => {
     }
 });
 
+// signature/delete POST route -
 app.post("/signature/delete", (req, res) => {
     return db
         .deleteSignature(req.session.userId)
@@ -365,6 +352,7 @@ app.post("/signature/delete", (req, res) => {
         });
 });
 
+// profile/delete POST route -
 app.post("/profile/delete", (req, res) => {
     Promise.all([
         db.deleteUserProfile(req.session.userId),
@@ -381,10 +369,10 @@ app.post("/profile/delete", (req, res) => {
         });
 });
 
+// logout GET route -
 app.get("/logout", (req, res) => {
     req.session = null;
     res.redirect("/register");
 });
 
-// app.listen(8080, () => console.log("I'm listening"));
 app.listen(process.env.PORT || 8080, () => console.log("I'm listening"));
