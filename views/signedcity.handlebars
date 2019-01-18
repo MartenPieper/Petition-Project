@@ -4,13 +4,12 @@
 <h1 class="text heading">We the signers from {{city}} agree to the following petitions:</h1>
 
 <div class="signedcity">
-
-<ul>
-{{#each people}}
-    <li class="signedlist">{{#if url}}<a href={{url}}>{{/if}}
-        <p class="text">{{firstname}} {{lastname}}</a> {{#if age}}{{age}}{{/if}}</p></li>
-  {{/each}}
-</ul>
-
+    <ul>
+        {{#each people}}
+        <li class="signedlist">{{#if url}}<a href={{url}}>{{/if}}
+            <p class="text">{{firstname}} {{lastname}}</a> {{#if age}}{{age}}{{/if}}</p>
+        </li>
+        {{/each}}
+    </ul>
 </div>
 {{> nav}}

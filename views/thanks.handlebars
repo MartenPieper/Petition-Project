@@ -4,30 +4,30 @@
 <h1 class="text heading">Thank You for Joining the Movement</h1>
 
 <div class="thanks">
-<h3 class="text" id="centertext">Your Signature</h3>
-<img id="signatureimage" src={{signature}} alt="">
+    <h3 class="text" id="centertext">Your Signature</h3>
+    <img id="signatureimage" src={{signature}} alt="">
 
-<p class="text" id="centertext">Signups to Goal: {{signups}}/100 <progress value={{signups}} max="100"></progress></p>
-<h3 class="text" id="centertext">See Your <a href="/signed" class="thankslink">{{signups}} Fellow Supporters</a></h3>
-<h3 class="text" id="centertext">Edit your <a href="/profile/edit" class="thankslink">Profile</a></h3>
+    <p class="text" id="centertext">Signups to Goal: {{signups}}/100 <progress value={{signups}} max="100"></progress></p>
+    <h3 class="text" id="centertext">See Your <a href="/signed" class="thankslink">{{signups}} Fellow Supporters</a></h3>
+    <h3 class="text" id="centertext">Edit your <a href="/profile/edit" class="thankslink">Profile</a></h3>
 
 
-{{#if email}}<p class="error">We added {{email}} to get updates on this petition</p>{{/if}}
+    {{#if email}}<p class="error">We added {{email}} to get updates on this petition</p>{{/if}}
 </div>
 
 <form class="deleteinput" method="POST" action="/signature/delete">
-<input type="hidden" name="_csrf" value="{{csrfToken}}">
-<button class="button">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+    <button class="button">
         Delete Your Signature
     </button>
 </form>
 
 <div class="newsletterinput">
-<h3 class="text">Get Updates about the Progress:</h3>
-<form method="POST">
-    <input type="text" value="" name="email" placeholder="Email">
-    <input type="hidden" name="_csrf" value="{{csrfToken}}">
-    <button class="button" id="newsletterbutton" type="submit" name="button">submit</button>
-</form>
+    <h3 class="text">Get Updates about the Progress:</h3>
+    <form method="POST">
+        <input type="text" value="" name="email" placeholder="Email">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <button class="button" id="newsletterbutton" type="submit" name="button">submit</button>
+    </form>
 </div>
 {{> nav}}

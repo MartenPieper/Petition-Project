@@ -5,19 +5,18 @@
 
 <div class="register">
     <h3 class="heading text">Sign Up</h3>
-<form class="registersubmit" method="POST" >
+    <form class="registersubmit" method="POST" >
+        <input class="inputregister" type="text" name="firstname" placeholder="First name">
+        <input class="inputregister" type="text" name="lastname" placeholder="Last name">
+        <input class="inputregister" type="text" name="email" placeholder="Email">
+        <input class="inputregister" type="password" name="password" placeholder="Password">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <button class="inputregister button" for="switch" type="submit" name="button">Submit</button>
+        <p class="text" id="centertext">By joining, or logging, you accept the Petition's <a href="/policies">Terms of Service</a> and <a href="/policies">Privacy Policy.</a></p>
+        <p class="text" id="centertext">Already a member? <a href="/login">Log in</a></p>
+    </form>
 
-    <input class="inputregister" type="text" name="firstname" placeholder="First name">
-    <input class="inputregister" type="text" name="lastname" placeholder="Last name">
-    <input class="inputregister" type="text" name="email" placeholder="Email">
-    <input class="inputregister" type="password" name="password" placeholder="Password">
-    <input type="hidden" name="_csrf" value="{{csrfToken}}">
-    <button class="inputregister button" for="switch" type="submit" name="button">Submit</button>
-    <p class="text" id="centertext">By joining, or logging, you accept the Petition's <a href="/policies">Terms of Service</a> and <a href="/policies">Privacy Policy.</a></p>
-    <p class="text" id="centertext">Already a member? <a href="/login">Log in</a></p>
-</form>
-
-{{#if error}}
-<p class="error">There was an error with your {{error}}</p>
-{{/if}}
+    {{#if error}}
+    <p class="error">There was an error with your {{error}}</p>
+    {{/if}}
 </div>

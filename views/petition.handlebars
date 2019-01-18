@@ -2,28 +2,19 @@
 
 <div class="petition">
 
-<h2 class="text heading">Join the Cause By Signing the Petition Today:</h2>
-    <form id="canvassubmit" method="POST" >
-        <input id="hiddenInput" type="hidden" name="signature" value="">
-        <input type="hidden" name="_csrf" value="{{csrfToken}}">
-        <canvas id="canvas" width="400" height="400"></canvas>
-    <!-- <input id="button" type="submit" value="Submit"> -->
-    <button class="button" id ="petitionbutton" type="submit" name="button">Submit</button>
-    </form>
+    <h2 class="text heading">Join the Cause By Signing the Petition Today:</h2>
+        <form id="canvassubmit" method="POST" >
+            <input id="hiddenInput" type="hidden" name="signature" value="">
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
+            <canvas id="canvas" width="400" height="400"></canvas>
+        <!-- <input id="button" type="submit" value="Submit"> -->
+        <button class="button" id ="petitionbutton" type="submit" name="button">Submit</button>
+        </form>
 
-<!-- <div class="infos">
-<div class="infotext" id="infotext1" tabindex="0">
-    <span class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-</span></div>
 
-<div class="infotext" id="infotext2" tabindex="0">
-    <span class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-</span></div>
-</div> -->
-
-{{#if error}}
-<p class="error">There was an error with your input</p>
-{{/if}}
+    {{#if error}}
+        <p class="error">There was an error with your input</p>
+    {{/if}}
 
 </div>
 
