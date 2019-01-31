@@ -17,6 +17,7 @@ const db = require("./db");
 var bcrypt = require("./bcrypt");
 
 // Middleware START
+// cookieSession -> secret: Session secret is a key used for signing and/or encrypting cookies set by the application to maintain session state
 app.use(
     cookieSession({
         secret: process.env.SESSION_SECRET || require("./secrets").secret,
@@ -26,6 +27,7 @@ app.use(
 
 app.disable("x-powered-by");
 
+// express.static: Serving all the static files in public folder
 app.use(express.static("./public"));
 
 app.use(bodyParser.json({ limit: "50mb" }));
@@ -36,8 +38,9 @@ app.use(
         extended: false
     })
 );
-
-app.use(csurf()); // Has to come after bodyParser and cookie.session
+// csurf: To protect from cross-site requests
+// Has to come after bodyParser and cookie.session
+app.use(csurf());
 
 app.use(function(req, res, next) {
     res.locals.csrfToken = req.csrfToken();
@@ -54,6 +57,10 @@ app.get("/", (req, res) => {
 });
 
 // Register GET route - Rendering register page or redirecting logged in users
+// Steps in detail: Hashing the provided password, inserting provided data into database (table: users), setting individual cookies
+// for the session and redirecting the user to the onboarding page. if password isn't provided or any other error occurs,
+// same page is rendered with an error message.
+// password has to be provided because otherwise only salt will be hashed and added to database
 app.get("/register", (req, res) => {
     if (!req.session.userId) {
         res.render("register", {
@@ -65,6 +72,7 @@ app.get("/register", (req, res) => {
 });
 
 // Register POST route -  db query to save user data + setting cookie, then redirecting to profile or rejecting input
+
 app.post("/register", (req, res) => {
     bcrypt
         .hash(req.body.password)
@@ -104,7 +112,13 @@ app.get("/login", (req, res) => {
     }
 });
 
-// Login POST route - db query to validate user input, setting cookie, then redirecting
+// Login POST route - db query to validate user input, setting cookie, then redirecting.
+// Steps in detail: Users data is retrieved from db tables by the provided email adress.
+// The provided password is then hashed and compared to the hash in the database. In case it is a match respective individual cookies for this session will be set
+// and it is checked whether this user has already filled out the additional onboarding information.
+// If yes, a respective cookie will be set. Then it's checked whether this user already has an entry in the signature table. The user is redirected
+//based on this information.
+//If the password doesn't match an error is thrown and the page is rendered with an error message.
 app.post("/login", (req, res) => {
     db.getUser(req.body.email)
         .then(function(results) {
@@ -154,6 +168,9 @@ app.get("/profile", (req, res) => {
 });
 
 // Profile POST route - db query to safe additional profile information
+// Steps in detail: The stringified value of the canvas signature is added to the hidden input field with the name "sig". The value is then
+// added to the signatures tables along with the respective user_id. A respective cookie is set and the user is redirected.
+// If there is a problem, same page is rendered with an error message.
 app.post("/profile", (req, res) => {
     return db
         .updateProfile(
@@ -200,6 +217,8 @@ app.post("/petition", (req, res) => {
 });
 
 // Thanks GET route - Rendering page with signup count and signature overview
+// Details: To render this page we need results of two queries: to get how many people signed the petition and to retrieve the
+// signature string to pass to the url of the image tag which we show on our page and to get the name of the current signer.
 app.get("/thanks", (req, res) => {
     Promise.all([db.getCount(), db.getSignature(req.session.userId)])
         .then(function([resultCount, resultSignature]) {
@@ -240,7 +259,8 @@ app.get("/signed", (req, res) => {
     });
 });
 
-// Signed:city GET route -
+// Signed:city GET route
+// Details: Getting all the rows from the signature table and rendering the template based on that
 app.get("/signed/:city", (req, res) => {
     return db.getCity(req.params.city).then(function(results) {
         res.render("signedcity", {
@@ -339,7 +359,9 @@ app.post("/profile/edit", (req, res) => {
     }
 });
 
-// signature/delete POST route -
+// signature/delete POST route
+// In detail: The row with the respective user_id is deleted from the signatures table. The respective cookie is deleted and
+// the user is redirected to the signature page with an according message.
 app.post("/signature/delete", (req, res) => {
     return db
         .deleteSignature(req.session.userId)
@@ -352,7 +374,8 @@ app.post("/signature/delete", (req, res) => {
         });
 });
 
-// profile/delete POST route -
+// profile/delete POST route
+// In detail: Deleting data from all tables in a proper order, deleting cookies and redirecting to the main page with an appropriate message
 app.post("/profile/delete", (req, res) => {
     Promise.all([
         db.deleteUserProfile(req.session.userId),
